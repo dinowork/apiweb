@@ -2,21 +2,15 @@
 
 ## Objetivo
 ```
-Aperfeiçoar o conhecimento em Web Service Restfull 2.0
+Aperfeiçoar o conhecimento em Spring boot e angular
 ```
 ##  Informação Técnica:
 ```
 - JDK 1.8
-- JUnit 4
-- JAX-RS 2.0
-- Requisição via Tela (Postman)
-- Consumo e retorno em JSON
-- Requisições PUT, POST, DELETE e GET
-- Apache Tomcat 8
+- Sring boot
+- Requisições PUT(alterar), POST(salvar), DELETE(apagar) e GET(listar)
 - Maven
 ```
 ## Observações
 ```
-- O postman e um extensão do chrome (um astronauta voando) é só importar o arquivo postman _ws.json (src/main/resources)
-- Para executar o JUnit aperta Ctrl + F11
 ```
