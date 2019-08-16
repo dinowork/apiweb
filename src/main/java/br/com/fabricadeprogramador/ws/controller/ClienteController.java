@@ -24,7 +24,15 @@ public class ClienteController {
 	//end point
 	@RequestMapping(method = RequestMethod.POST, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
-		Cliente clienteCadastrado = clienteService.cadastrar(cliente);				
+		
+		Cliente clienteCadastrado = null;
+		if(cliente.getId() == null ) {
+			clienteCadastrado = clienteService.cadastrar(cliente);	
+		}else {
+			clienteCadastrado = clienteService.cadastrar(cliente);
+		}
+		
+						
 		return new ResponseEntity<Cliente>(clienteCadastrado , HttpStatus.CREATED) ;
 	}
 	
