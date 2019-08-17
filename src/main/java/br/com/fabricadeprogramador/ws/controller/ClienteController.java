@@ -23,16 +23,13 @@ public class ClienteController {
 		
 	//end point
 	@RequestMapping(method = RequestMethod.POST, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
-		
+	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {		
 		Cliente clienteCadastrado = null;
 		if(cliente.getId() == null ) {
 			clienteCadastrado = clienteService.cadastrar(cliente);	
 		}else {
 			clienteCadastrado = clienteService.cadastrar(cliente);
 		}
-		
-						
 		return new ResponseEntity<Cliente>(clienteCadastrado , HttpStatus.CREATED) ;
 	}
 	
@@ -57,6 +54,14 @@ public class ClienteController {
 		return new ResponseEntity<Cliente>(clienteCadastrado , HttpStatus.OK) ;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/clientes/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
+	public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Integer id) {
+		Cliente clienteEncontrado = clienteService.buscarPorId(id);
+		if(clienteEncontrado ==  null) 
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);			
+		return new ResponseEntity<>(clienteEncontrado , HttpStatus.OK);
+	}
+
 	
 	
 }
