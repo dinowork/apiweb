@@ -16,12 +16,12 @@ import br.com.fabricadeprogramador.model.Cliente;
 import br.com.fabricadeprogramador.ws.service.ClienteService;
 
 @RestController
+@RequestMapping("/admin")
 public class ClienteController {	
 	
 	@Autowired
 	ClienteService clienteService; 
-		
-	//end point
+
 	@RequestMapping(method = RequestMethod.POST, value = "/clientes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {		
 		Cliente clienteCadastrado = null;

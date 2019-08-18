@@ -1,11 +1,64 @@
-<div>
-	Oi {{cliente.nome}}
+<style>
+	fieldset{
+		display:inline;
+	}
+</style>
 
-<form novalidate>		 
-	<input type="text" ng-model="cliente.nome" required/>		 
-	<input type="button" value="Salvar" ng-click="salvarCliente()"/>
-	<input type="button" value="Cancelar" ng-click="cancelarCliente()"/>
+<div>
+<form novalidate name="frmCliente">		 
+	<div>
+		<label>Nome</label>
+		<input type="text" ng-minlength="2" ng-maxlength="8" name="txtNome" ng-model="cliente.nome" required/>
+		<span ng-show="frmCliente.txtNome.$dirty && frmCliente.txtNome.$error.required">Nome é um campo obrigatório</span>
+		<span ng-show="frmCliente.txtNome.$dirty && frmCliente.txtNome.$error.minlength">Nome minimo 2 caracteres</span>
+		<span ng-show="frmCliente.txtNome.$dirty && frmCliente.txtNome.$error.maxlength">Nome maximo 8 caracteres</span>
+	</div>	
+	<div>
+		<label>E-mail</label>
+		<input type="email" name="txtEmail" ng-model="cliente.email" required/>
+		<span ng-show="frmCliente.txtEmail.$dirty && frmCliente.txtEmail.$error.required">Email é um campo obrigatório</span>
+		<span ng-show="frmCliente.txtEmail.$error.email">Email é invalido</span>
+	</div>
+	<div>	
+		<label>Estado:
+			<select ng-model="cliente.estado" ng-options="estado.uf for estado in estados"></select>
+		</label>
+  	</div>	
+			 
+	<input type="button"  value="Salvar" ng-click="salvarCliente()" />	
+	<input type="button" value="Cancelar" ng-click="cancelarCliente()" ng-disabled="frmCliente.$invalid"/>
 </form>			 
+
+<div>
+	<fieldset>
+		<legend>Formulario</legend>
+		Valid: {{frmCliente.$valid}} <br/>
+		Invalid: {{frmCliente.$invalid}}
+		Pristine (é virgem): {{frmCliente.$pristine}}<br/>		
+	</fieldset>
+	
+	<fieldset>
+		<legend>Nome</legend>
+		Valid (é valido): {{frmCliente.txtNome.$valid}}<br/>
+		Invalid (é invalido): {{frmCliente.txtNome.$invalid}}<br/>
+		Pristine (é virgem): {{frmCliente.txtNome.$pristine}}<br/>
+		Dirty (é usuado): {{frmCliente.txtNome.$dirty}}<br/>
+		Touched (já passei): {{frmCliente.txtNome.$touched}}<br/>
+		Required (é obrigatorio): {{frmCliente.txtNome.$error.required}}<br/>
+		Min Length (minimo caracteres): {{frmCliente.txtNome.$error.minlength}}<br/>
+		Max Length (maximo caracteres): {{frmCliente.txtNome.$error.maxlength}} 	 			 
+	</fieldset>
+	<fieldset>
+		<legend>email</legend>
+		Valid (é valido): {{frmCliente.txtEmail.$valid}}<br/>
+		Invalid (é invalido): {{frmCliente.txtEmail.$invalid}}<br/>
+		Pristine (é virgem): {{frmCliente.txtEmail.$pristine}}<br/>
+		Dirty (é usuado): {{frmCliente.txtEmail.$dirty}}<br/>
+		Touched (já passei): {{frmCliente.txtEmail.$touched}}<br/>
+		Required (é obrigatorio): {{frmCliente.txtEmail.$error.required}}		 
+	</fieldset>
+		
+</div>
 
 	<div ng-repeat="cli in clientes">
 		{{cli.id + " " + cli.nome}} <input type="button" value="Excluir" ng-click="excluirCliente(cli)"/>
