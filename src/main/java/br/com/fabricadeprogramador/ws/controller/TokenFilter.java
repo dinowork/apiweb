@@ -7,11 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.GenericFilterBean;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
 
 public class TokenFilter extends GenericFilterBean {
 
@@ -29,8 +29,8 @@ public class TokenFilter extends GenericFilterBean {
 		String token  = header.substring(7);
 		try {
 			Jwts.parser().setSigningKey("banana").parseClaimsJws(token).getBody();
-		}catch (SignatureException e) {
-			throw new ServletException("Token inválido");
+		}catch (Exception e) {
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido"); 
 		}
 		
 		chain.doFilter(request, response);
