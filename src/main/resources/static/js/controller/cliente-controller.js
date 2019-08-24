@@ -1,6 +1,6 @@
 appCliente.controller("clienteController", function($scope, $http){  	
 	
-	$http.defaults.headers.common.Authorization ="Bearer "+localStorage.getItem("userToken");
+	//$http.defaults.headers.common.Authorization ="Bearer "+localStorage.getItem("userToken");
 	
 	$scope.clientes=[];
 	$scope.cliente={};
